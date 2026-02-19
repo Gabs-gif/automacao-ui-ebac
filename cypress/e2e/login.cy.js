@@ -1,18 +1,19 @@
 describe('Login', () => {
-  it('Funcionalidade login', () => {
-    cy.visit('https://siteexemplo.com/login')
+  //TESTES DE LOGIN COMPLETOS
+  it.only('Login Valido', () => {
+    cy.visit('http://localhost:3000/login.html')
   
-    cy.get('#username').type('usuario_teste')
-    cy.get('#password').type('senha_teste')
-    cy.get('#loginButton').click()
+    cy.get('#email').type('usuario@teste.com')
+    cy.get('#password').type('user123')
+    cy.get('#login-btn').click()
   cy.url().should('include', '/dashboard')
   })
   it('Login invalido', () => {
-    cy.visit('https://siteexemplo.com/login')
+    cy.visit('http://localhost:3000/login.html')
   
-    cy.get('#username').type('usuario_invalido')
+    cy.get('#email').type('usuario@aleatorio.com')
     cy.get('#password').type('senha_invalida')
-    cy.get('#loginButton').click()
-  cy.get('.mensagem de erro').should('be.visible')
+    cy.get('#login-btn').click()
+  cy.get('#alert-container').should('be.visible')
   })
 })

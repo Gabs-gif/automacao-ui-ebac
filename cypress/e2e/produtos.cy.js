@@ -1,30 +1,26 @@
+//TESTES DE PRODUTOS COMPLETOS
 describe('Funcionalidade Produtos', () => {
     it('Listagem de Produtos', () => {
-        cy.visit('https://siteexemplo.com/produtos')
-        cy.get('.produto-item').should('have.length.greaterThan', 24)
-    cy.get('.produto-item').first().should('contain.text', 'Produto Exemplo 1')
+        cy.visit('http://localhost:3000/catalog.html')
+        cy.get('#results-count')
+    cy.get(':nth-child(1) > .card > .card-body > .mt-auto > .d-grid > .btn-outline-info').should('be.visible')
     });
 
     it('Pesquisa por Produto', () => {
-        cy.visit('https://siteexemplo.com/produtos')
-        cy.get('#barraPesquisa').type('Produto Exemplo 5')
-        cy.get('#botaoPesquisa').click()
-    cy.get('.produto-item').should('have.length', 1)
-    cy.get('.produto-item').first().should('contain.text', 'Produto Exemplo 5')
+        cy.visit('http://localhost:3000/catalog.html')
+        cy.get('#search-input').type('A menina que roubava livros')
+         cy.get('#results-count').should('contain.text', 'Exibindo 1 de 1 livro')
     });
 
-    it('Filtro de Categoria', () => {
-        cy.visit('https://siteexemplo.com/produtos')
-        cy.get('#filtroCategoria').select('Eletrônicos')
-        cy.get('.produto-item').should('contain.text', 'Produto Exemplo Eletronicos 1')
-});
-    it('Adição ao Carrinho', () => {
-        cy.visit('https://siteexemplo.com/produtos')
-        cy.get('.produto-item').first().within(() => {
-            cy.get('.adicionar-ao-carrinho').click()
-        });
-        cy.get('#iconeCarrinho').click()
-    cy.get('.item-carrinho').should('have.length', 1)
-    cy.get('.item-carrinho').first().should('contain.text', 'Produto Exemplo 1')
+   
+    it.only('Adição ao Carrinho', () => {
+        cy.visit('http://localhost:3000/catalog.html')
+        cy.get(':nth-child(1) > .card > .card-body')
+            cy.get(':nth-child(1) > .card > .card-body > .mt-auto > .d-grid > .btn-primary').click()
+            cy.get('.alert-success').should('be.visible')
+      
+        cy.get(':nth-child(2) > .nav-link').click()
+    cy.get('.card-body > .row')
+    
     });
 });
